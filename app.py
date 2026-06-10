@@ -1,17 +1,27 @@
- #print("hello expense tracker")
 
-expense =[]
+from services.storage_services import (create_database,save_expense,get_all_expenses)
 
-amt =int(input("enter amount spent:"))
-category =input("enter category of expense:")
+create_database()
 
-print("AMOUNT:",amt)
-print("CATEGORY:",category)
+print("Database created successfully")
 
-expenses={
-    "amount":amt,
-    "category":category
-}
+# saving into database
+ 
+'''from models.expense import Expense
+from services.storage_services import save_expense
+expense1 = Expense(100, "Food", "McDonald's", "2024-06-01")
+save_expense(expense1)
+print("Expense saved successfully")'''
+from models.expense import Expense
 
-expense.append(expenses)
-print("EXPENSES:",expense)
+expense1 = Expense(
+    100,
+    "Food",
+    "McDonald's",
+    "2024-06-01"
+)
+
+print(expense1.amount)
+save_expense(expense1)
+print("expense saved successfully")
+print(get_all_expenses())
