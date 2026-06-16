@@ -40,3 +40,19 @@ def get_all_expenses():
     connection.close()
 
     return expenses
+
+
+def get_expenses_by_category(category):
+    connection = sqlite3.connect("database/expenses.db")
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "SELECT * FROM expenses WHERE category = ?",
+        (category,)
+    )
+
+    expenses = cursor.fetchall()
+
+    connection.close()
+
+    return expenses
