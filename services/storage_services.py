@@ -56,3 +56,16 @@ def get_expenses_by_category(category):
     connection.close()
 
     return expenses
+
+
+def delete_expense(expense_id):
+    connection = sqlite3.connect("database/expenses.db")
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "DELETE FROM expenses WHERE id = ?",
+        (expense_id,)
+    )
+
+    connection.commit()
+    connection.close()
