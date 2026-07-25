@@ -1,6 +1,6 @@
 
 from services.storage_services import (create_database,save_expense,get_all_expenses,
-                                       get_expenses_by_category,delete_expense)
+                                       get_expenses_by_category,update_expense,delete_expense)
 
 create_database()
 
@@ -23,7 +23,8 @@ while True:
     print("3. total expenses")
     print("4. View Expenses by Category")
     print("5. delete expense")
-    print("6. Exit")
+    print("6. update expense")
+    print("7. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -94,8 +95,36 @@ while True:
                 print(f"Expense with ID {expense_id} deleted successfully.")
             else:
                 print(f"Expense with ID {expense_id} not found.")
-             
+
+    
     elif choice == "6":
+        expense_id = int(input("Enter Expense ID to update: "))
+
+        expenses = get_all_expenses()
+
+        found = False
+
+        for expense in expenses:
+            if expense[0] == expense_id:
+                found = True
+                break
+
+        if found:
+            amount = float(input("Enter new amount: "))
+            category = input("Enter new category: ").capitalize()
+            merchant = input("Enter new merchant: ")
+            date = input("Enter new date (YYYY-MM-DD): ")
+
+            update_expense(expense_id, amount, category, merchant, date)
+
+            print("Expense updated successfully!")
+
+        else:
+            print("Expense with the given ID does not exist.")
+    
+    
+    
+    elif choice == "7":
         print("Exiting...")
         break
 
